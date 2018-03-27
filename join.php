@@ -1,6 +1,16 @@
 <?php
   require 'db.php';
   session_start();
+  function rcopy($src, $dst) {
+    if (file_exists($dst)) rmdir($dst);
+    if (is_dir($src)) {
+      mkdir($dst);
+      $files = scandir($src);
+      foreach ($files as $file)
+      if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file");
+    }
+    else if (file_exists($src)) copy($src, $dst);
+  }
   if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['login'])){
       // echo "login";
@@ -38,6 +48,10 @@
           if ($mysqli->query($sql)){
               echo "account created";
               mkdir('upload/'.$username, 0777, true);
+              $src=getcwd();
+              $src=$src."/lister";
+              $dst='upload/'.$username;
+              rcopy($src,$dst);
               header("location: index.html");
           }
           else {
