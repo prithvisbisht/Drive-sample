@@ -85,7 +85,7 @@ else{
         <div class="row justify-content-around">
             <!--Grid column-->
             <div class="col-md-5 col-sm-12 text-center mb-5 block">
-              <img class="ico-image" src="img/file.jpg" alt=""><hr>
+              <img class="ico-image" src="img/folder.jpg" alt=""><hr>
               <div class="container">
                 <button class="btn btn-warning btn-block" type="button" data-toggle="modal" data-target="#folder">upload folder</button><br>
                 <!-- <button class="btn btn-outline-warning" type="button" data-toggle="modal" data-target="#file">upload files</button> -->
@@ -111,7 +111,7 @@ else{
               </div>
             </div>
             <div class="col-md-5 offset-md-2 col-sm-12 text-center mb-5 block">
-              <img class="ico-image" src="img/folder.jpg" alt=""><hr>
+              <img class="ico-image" src="img/file.jpg" alt=""><hr>
               <div class="container">
                 <button class="btn btn-warning btn-block" type="button" data-toggle="modal" data-target="#filesuplod">upload Files</button><br>
                 <!-- <button class="btn btn-outline-warning" type="button" data-toggle="modal" data-target="#file">upload files</button> -->

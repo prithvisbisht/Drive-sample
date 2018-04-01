@@ -65,7 +65,7 @@ body,html{
 }
 .secon{
 	background-image: url('../img/a.jpg');
-	min-height: 700px;
+	min-height: 300px;
 }
 .second{
 	background-image: url('../img/space2.jpg');
