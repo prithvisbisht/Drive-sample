@@ -29,7 +29,12 @@ body,html{
 	color: black;
   margin-top: 50px;
   padding: 30px;
+	opacity: .7;
   transition: transform .2s;
+}
+.block:hover{
+	color: white;
+	opacity: 1;
 }
 .blocks{
   color: black;
@@ -178,4 +183,19 @@ ul{
 .ico-image{
 	height: 300px;
 	width: 300px;
+}
+.text
+{
+	font-family: "cursive", "helvetica";
+	margin: 50px 20px;
+}
+.footer{
+	left: 0px;
+	bottom: 0px;
+	position: fixed;
+}
+.logout{
+	margin-top: 100px;
+	margin-left: 200px;
+	margin-right: 200px;
 }

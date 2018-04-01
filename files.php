@@ -1,6 +1,11 @@
 <?php
 require('db.php');
 session_start();
+if ($_SESSION['login']!=true) {
+  $_SESSION['message']="You should be logged in to view this page... Please try Again";
+  header("location:error.php");
+}
+
 $username=$_SESSION['username'];
 if ($_SESSION['logged_in']!=false) {
   if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -73,21 +78,22 @@ else{
     <meta charset="utf-8">
     <title>Upload</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="css/mdb.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="secon">
+    <div class="container text">
+      <h2 class="text-center">UPLOAD YOUR FILES</h2>
     </div>
-    <div class="container">
+    <div class="container upload_page">
         <!--Grid row-->
         <div class="row justify-content-around">
             <!--Grid column-->
             <div class="col-md-5 col-sm-12 text-center mb-5 block">
               <img class="ico-image" src="img/folder.jpg" alt=""><hr>
               <div class="container">
-                <button class="btn btn-warning btn-block" type="button" data-toggle="modal" data-target="#folder">upload folder</button><br>
+                <button class="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#folder">upload folder</button><br>
                 <!-- <button class="btn btn-outline-warning" type="button" data-toggle="modal" data-target="#file">upload files</button> -->
                 <div class="modal fade" id="folder" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -113,7 +119,7 @@ else{
             <div class="col-md-5 offset-md-2 col-sm-12 text-center mb-5 block">
               <img class="ico-image" src="img/file.jpg" alt=""><hr>
               <div class="container">
-                <button class="btn btn-warning btn-block" type="button" data-toggle="modal" data-target="#filesuplod">upload Files</button><br>
+                <button class="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#filesuplod">upload Files</button><br>
                 <!-- <button class="btn btn-outline-warning" type="button" data-toggle="modal" data-target="#file">upload files</button> -->
                 <div class="modal fade" id="filesuplod" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">

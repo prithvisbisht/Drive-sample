@@ -27,7 +27,7 @@
           $_SESSION['id'] = $user['user_id'];
           $_SESSION['username'] = $user['username'];
           $globals['username']=$user['username'];
-          $_SESSION['logged_in'] = true;
+          $_SESSION['login'] = true;
           header("location: home.php");
         }
       }
@@ -40,7 +40,8 @@
       $result = $mysqli->query("SELECT * FROM user WHERE email='$email'");
       $row=mysqli_fetch_assoc($result);
       if ( $result->num_rows > 0 ){
-          echo "email in use by another user";
+          $_SESSION['message']="The email you are trying to use is already in use by another user.. Please try again....";
+          header("location: error.php");
       }
       else{
         $username=$name.rand();
@@ -52,7 +53,8 @@
               $src=$src."/lister";
               $dst='upload/'.$username;
               rcopy($src,$dst);
-              header("location: index.html");
+              $_SESSION['message']="Your account was successfully created login to access your credential... Thank you";
+              header("location: error.php");
           }
           else {
             echo "error";
@@ -70,7 +72,7 @@
     <meta charset="utf-8">
     <title>Drive</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="css/mdb.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
   </head>

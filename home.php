@@ -1,5 +1,9 @@
 <?php
 session_start();
+if ($_SESSION['login']!=true) {
+  $_SESSION['message']="You should be logged in to view this page... Please try Again";
+  header("location:error.php");
+}
 $username=$_SESSION['username'];
 $temp=getcwd();
 $temp=$temp.'/upload/'.$username.'/';
