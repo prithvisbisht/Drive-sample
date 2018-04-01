@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 class DirectoryListing {
 	/*
 	====================================================================================================
@@ -30,7 +30,7 @@ class DirectoryListing {
 	public $startDirectory = '.';
 
 	// An optional title to show in the address bar and at the top of your page (set to null to leave blank)
-	public $pageTitle = 'Evoluted Directory Listing Script';
+	public $pageTitle = 'Drive Dashboard';
 
 	// The URL of this script. Optionally set if your server is unable to detect the paths of files
 	public $includeUrl = false;
@@ -973,6 +973,24 @@ function pr($data, $die = false) {
 			<?php endif; ?>
 
 
+			<div class="table-container">
+				<table class="table table-striped table-bordered">
+					<tfoot>
+						<tr>
+							<td>
+								<form action="" method="post" class="text-center form-inline">
+									<div class="form-group">
+										<label for="directory">Directory Name:</label>
+										<input type="text" name="directory" id="directory" class="form-control">
+										<button type="submit" class="btn btn-primary" name="submit">Create Directory</button>
+									</div>
+								</form>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="table-container">
@@ -1002,58 +1020,73 @@ function pr($data, $die = false) {
 								<?php endif; ?>
 
 								<?php if($listing->enableDirectoryCreation): ?>
-								<tfoot>
-									<tr>
-										<td>
-											<form action="" method="post" class="text-center form-inline">
-												<div class="form-group">
-													<label for="directory">Directory Name:</label>
-													<input type="text" name="directory" id="directory" class="form-control">
-													<button type="submit" class="btn btn-primary" name="submit">Create Directory</button>
-												</div>
-											</form>
-										</td>
-									</tr>
-								</tfoot>
 								<?php endif; ?>
 							</table>
 						</div>
 					</div>
 				</div>
 
+				<!-- This portion displays the file in our home page -->
+				<?php if (! empty($data['files'])): ?>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="table-container">
+								<table class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>
+												<a href="<?php echo $listing->sortUrl('name'); ?>">File <span class="<?php echo $listing->sortClass('name'); ?>"></span></a>
+											</th>
+											<th class="text-right xs-hidden">
+												<a href="<?php echo $listing->sortUrl('size'); ?>">Size <span class="<?php echo $listing->sortClass('size'); ?>"></span></a>
+											</th>
+											<th class="text-right sm-hidden">
+												<a href="<?php echo $listing->sortUrl('modified'); ?>">Last Modified <span class="<?php echo $listing->sortClass('modified'); ?>"></span></a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+									<?php foreach ($data['files'] as $file): ?>
+										<tr>
+											<td>
+												<a href="<?php echo $file['url']; ?>" target="<?php echo $file['target']; ?>" class="item _blank <?php echo $file['extension']; ?>">
+													<?php echo $file['name']; ?>
+												</a>
+												<?php if (isset($file['preview']) && $file['preview']): ?>
+													<span class="preview"><img src="?preview=<?php echo $file['relativePath']; ?>"><i class="preview_icon"></i></span>
+												<?php endif; ?>
+
+												<?php if ($listing->enableFileDeletion == true): ?>
+													<a href="?deleteFile=<?php echo urlencode($file['relativePath']); ?>" class="pull-right btn btn-danger btn-xs" onclick="return confirm('Are you sure?')">Delete</a>
+												<?php endif; ?>
+											</td>
+											<td class="text-right xs-hidden"><?php echo $file['size']; ?></td>
+											<td class="text-right sm-hidden"><?php echo date('M jS Y \a\t g:ia', $file['modified']); ?></td>
+										</tr>
+									<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
 			<?php if ($data['enableUploads']): ?>
 				<div class="row">
 					<div class="col-xs-12">
 						<form action="" method="post" enctype="multipart/form-data" class="text-center upload-form form-vertical">
-							<h4>Upload A File</h4>
-							<div class="row upload-field">
-								<div class="col-xs-12">
-									<div class="form-group">
-										<div class="row">
-											<div class="col-sm-2 col-md-2 col-md-offset-3 text-right">
-												<label for="upload">File:</label>
-											</div>
-											<div class="col-sm-10 col-md-4">
-												<input type="file" name="upload[]" id="upload" class="form-control">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 							<hr>
 							<?php if ($listing->enableMultiFileUploads): ?>
 								<div class="row">
-									<div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2 col-lg-3 col-lg-offset-2">
-										<button type="button" class="btn btn-success btn-block" name="add_file">Add Another File</button>
-									</div>
-									<div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-1 col-lg-3 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary btn-block" name="submit">Upload File(s)</button>
+									<div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+										<form class="" action="../upload.php" method="get">
+											<a href="files.php" style="text-decoration:none;"><input class="btn btn-success btn-block btn-lg" type="button" value="Upload Files"/></a>
+										</form>
 									</div>
 								</div>
 							<?php else: ?>
 								<div class="row">
 									<div class="col-xs-12 col-sm-6 col-sm-offset-3">
-										<button type="submit" class="btn btn-primary btn-block" name="submit">Upload File</button>
+										<button class="btn btn-warning btn-block btn-lg" name="submit">Upload File</button><br>
 									</div>
 								</div>
 							<?php endif; ?>
@@ -1062,48 +1095,7 @@ function pr($data, $die = false) {
 				</div>
 			<?php endif; ?>
 
-			<?php if (! empty($data['files'])): ?>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="table-container">
-							<table class="table table-striped table-bordered">
-								<thead>
-									<tr>
-										<th>
-											<a href="<?php echo $listing->sortUrl('name'); ?>">File <span class="<?php echo $listing->sortClass('name'); ?>"></span></a>
-										</th>
-										<th class="text-right xs-hidden">
-											<a href="<?php echo $listing->sortUrl('size'); ?>">Size <span class="<?php echo $listing->sortClass('size'); ?>"></span></a>
-										</th>
-										<th class="text-right sm-hidden">
-											<a href="<?php echo $listing->sortUrl('modified'); ?>">Last Modified <span class="<?php echo $listing->sortClass('modified'); ?>"></span></a>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-								<?php foreach ($data['files'] as $file): ?>
-									<tr>
-										<td>
-											<a href="<?php echo $file['url']; ?>" target="<?php echo $file['target']; ?>" class="item _blank <?php echo $file['extension']; ?>">
-												<?php echo $file['name']; ?>
-											</a>
-											<?php if (isset($file['preview']) && $file['preview']): ?>
-												<span class="preview"><img src="?preview=<?php echo $file['relativePath']; ?>"><i class="preview_icon"></i></span>
-											<?php endif; ?>
 
-											<?php if ($listing->enableFileDeletion == true): ?>
-												<a href="?deleteFile=<?php echo urlencode($file['relativePath']); ?>" class="pull-right btn btn-danger btn-xs" onclick="return confirm('Are you sure?')">Delete</a>
-											<?php endif; ?>
-										</td>
-										<td class="text-right xs-hidden"><?php echo $file['size']; ?></td>
-										<td class="text-right sm-hidden"><?php echo date('M jS Y \a\t g:ia', $file['modified']); ?></td>
-									</tr>
-								<?php endforeach; ?>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
 			<?php else: ?>
 				<div class="row">
 					<div class="col-xs-12">
@@ -1113,7 +1105,7 @@ function pr($data, $die = false) {
 			<?php endif; ?>
 		<?php endif; ?>
 		<div class="row">
-			<div class="col-xs-12 text-center"><hr>Directory Listing Script &copy; <?php echo date('Y'); ?> Evoluted, <a href="http://www.evoluted.net">Web Design Sheffield</a></div>
+			<div class="col-xs-12 text-center"><hr>Designer Prithvi Raj&copy; <?php echo date('Y'); ?> </div>
 		</div>
 	</div>
 	<style>
@@ -1195,6 +1187,8 @@ function pr($data, $die = false) {
 	</style>
 	<?php if ($listing->enableMultiFileUploads): ?>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.1/popper.min.js"></script>
 		<script>
 			$('button[name=add_file]').on('click', function(e) {
 				e.preventDefault();

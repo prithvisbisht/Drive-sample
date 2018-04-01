@@ -77,7 +77,7 @@
   <body>
     <div id="particles-js">
         <div class="form">
-          <ul class="row container-fluid tab-group">
+          <ul class=" row container-fluid tab-group">
             <li class="col tab tab-active"><a class="" id="showLogin">Login</a></li>
             <li class="col tab"><a class="" id="showRegister">Sign Up</a></li>
           </ul>

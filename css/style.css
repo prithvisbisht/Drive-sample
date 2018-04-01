@@ -15,7 +15,7 @@ body,html{
   object-fit: fill;
   background-repeat: no-repeat;
 }
-.second,.first{
+.second,.first,.secon{
 	position: relative;
 	/*opacity: 0.70;*/
 	background-position: center;
@@ -25,6 +25,12 @@ body,html{
 	*/
 	background-attachment: fixed;
 }
+.block{
+	color: black;
+  margin-top: 50px;
+  padding: 30px;
+  transition: transform .2s;
+}
 .blocks{
   color: black;
   margin-top: 50px;
@@ -32,10 +38,10 @@ body,html{
   transition: transform .2s;
 }
 .blocks:hover{
-  background-color: black;
-  color: white;
+  background-color:black;
   transform: scale(1.1);
-  /*opacity: .5;*/
+	color: white;
+	*opacity: .5;
 }
 .ptext{
 	position: absolute;
@@ -57,7 +63,10 @@ body,html{
 	text-align: center;
 	padding: 50px 80px;
 }
-
+.secon{
+	background-image: url('../img/a.jpg');
+	min-height: 700px;
+}
 .second{
 	background-image: url('../img/space2.jpg');
   min-height: 700px;
@@ -165,4 +174,8 @@ ul{
 }
 .right{
 	padding: 70px 50px;
+}
+.ico-image{
+	height: 300px;
+	width: 300px;
 }
