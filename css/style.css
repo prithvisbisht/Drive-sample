@@ -78,7 +78,7 @@ body,html{
 }
 .first{
   background-image: url('../img/space2.jpg');
-  min-height:700px;
+  min-height:600px;
 }
 .section-light{
 	background-color: #f4f4f4;
@@ -192,7 +192,14 @@ ul{
 .footer{
 	left: 0px;
 	bottom: 0px;
+	width:100%;
 	position: fixed;
+	text-align: center;
+	background-color: black;
+	height: 40px;
+	color: white;
+	padding: 10px;
+	font-family:Helvetica;
 }
 .logout{
 	margin-top: 100px;
