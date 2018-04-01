@@ -32,10 +32,10 @@ body,html{
 	opacity: .7;
   transition: transform .2s;
 }
-.block:hover{
+/*.block:hover{
 	color: white;
 	opacity: 1;
-}
+}*/
 .blocks{
   color: black;
   margin-top: 50px;
@@ -193,7 +193,6 @@ ul{
 	left: 0px;
 	bottom: 0px;
 	width:100%;
-	position: fixed;
 	text-align: center;
 	background-color: black;
 	height: 40px;

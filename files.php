@@ -7,7 +7,7 @@ if ($_SESSION['login']!=true) {
 }
 
 $username=$_SESSION['username'];
-if ($_SESSION['logged_in']!=false) {
+if ($_SESSION['login']!=false) {
   if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['upload_folder'])){
       $description=$_POST['description'];
@@ -152,7 +152,7 @@ else{
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
   </body>

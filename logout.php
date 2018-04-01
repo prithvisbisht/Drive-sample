@@ -22,7 +22,7 @@ else {
         <h4 class="alert-heading">Logout</h4>
         <p>You have been successfully logged out</p>
         <hr>
-        <p class="alert alert-success"><strong><a href="join.php">Click here</a></strong> to login</p>
+        <p class="alert alert-success"><strong><a href="join.php">Click here</a></strong> to login or visit our home page <a href="index.html" style="text-decoration:none;"><span>Home</span></a></p>
       </div>
     </div>
   </body>
