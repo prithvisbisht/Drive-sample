@@ -7,7 +7,6 @@ if ($_SESSION['login']!=true) {
 }
 
 $username=$_SESSION['username'];
-if ($_SESSION['login']!=false) {
   if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['upload_folder'])){
       $description=$_POST['description'];
@@ -67,10 +66,6 @@ if ($_SESSION['login']!=false) {
       }
     }
   }
-}
-else{
-  header("location:index.html");
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,14 +78,14 @@ else{
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container text">
-      <h2 class="text-center">UPLOAD YOUR FILES</h2>
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: 50px; margin-top: 80px;">UPLOAD YOUR FILES</h2>
     </div>
-    <div class="container upload_page">
+    <div class="container">
         <!--Grid row-->
         <div class="row justify-content-around">
             <!--Grid column-->
-            <div class="col-md-5 col-sm-12 text-center mb-5 block">
+            <div class="col-md-5 col-sm-12 text-center mb-5">
               <img class="ico-image" src="img/folder.jpg" alt=""><hr>
               <div class="container">
                 <button class="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#folder">upload folder</button><br>
@@ -116,7 +111,7 @@ else{
                 </div>
               </div>
             </div>
-            <div class="col-md-5 offset-md-2 col-sm-12 text-center mb-5 block">
+            <div class="col-md-5 offset-md-2 col-sm-12 text-center mb-5">
               <img class="ico-image" src="img/file.jpg" alt=""><hr>
               <div class="container">
                 <button class="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#filesuplod">upload Files</button><br>
